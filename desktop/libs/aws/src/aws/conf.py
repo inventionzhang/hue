@@ -257,7 +257,8 @@ AWS_ACCOUNTS = UnspecifiedConfigSection(
 
 def is_enabled():
   return ('default' in list(AWS_ACCOUNTS.keys()) and AWS_ACCOUNTS['default'].get_raw() and AWS_ACCOUNTS['default'].ACCESS_KEY_ID.get()) or \
-      has_iam_metadata()
+      has_iam_metadata() or (conf_idbroker.is_idbroker_enabled('s3a') and is_ec2_instance())
+
 
 
 def is_ec2_instance():
